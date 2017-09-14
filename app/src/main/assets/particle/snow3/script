@@ -2,7 +2,7 @@
 <scene>
     <width_height>720,1280</width_height>
     <src_scale>1.0,1.0</src_scale>
-    <max>36</max>
+    <max>23</max>
     <model>
         <chance_range>0,.5</chance_range>
 		<active_time>4000,7000</active_time><!-- min,max -->
