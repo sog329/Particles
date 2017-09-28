@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<scene>
+    <width_height>720,1280</width_height>
+    <src_scale>1.0,1.0</src_scale>
+    <max>10</max>
+    <model>
+        <chance_range>0,.6</chance_range>
+        <active_time>1700,2100</active_time>
+        <src_ltwh>64,42,52,62</src_ltwh>
+        <move_from>0,1280,360,10</move_from>
+        <move_to>360,550,360,180</move_to>
+        <move_interpolator>0,3</move_interpolator>
+        <rotate>0,30,130,180,26,26</rotate>
+        <alpha>255,255</alpha>
+        <scale>1.4,1.6</scale>
+    </model>
+    <model>
+        <chance_range>.6,.8</chance_range>
+        <active_time>1700,2100</active_time>
+        <src_ltwh>64,0,35,40</src_ltwh>
+        <move_from>0,1280,360,10</move_from>
+        <move_to>360,600,360,80</move_to>
+        <move_interpolator>0,3</move_interpolator>
+        <rotate>0,30,130,180,17,20</rotate>
+        <alpha>255,255</alpha>
+        <scale>1.3,1.5</scale>
+    </model>
+    <model>
+        <chance_range>.8,1</chance_range>
+        <active_time>1600,2100</active_time>
+        <src_ltwh>64,42,52,62</src_ltwh>
+        <move_from>0,1280,360,10</move_from>
+        <move_to>360,600,360,80</move_to>
+        <move_interpolator>0,3</move_interpolator>
+        <rotate>0,50,130,180,26,31</rotate>
+        <alpha>255,255</alpha>
+        <scale>1.5,1.8</scale>
+    </model>
+</scene>

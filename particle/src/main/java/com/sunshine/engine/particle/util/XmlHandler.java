@@ -31,6 +31,7 @@ public class XmlHandler extends DefaultHandler {
 
   public static final String MOVE_FROM = "move_from";
   public static final String MOVE_TO = "move_to";
+  public static final String MOVE_INTERPOLATOR = "move_interpolator";
   public static final String MATCH_PARENT = "match_parent";
   public static final String OFFSET = "offset:";
 
@@ -114,8 +115,6 @@ public class XmlHandler extends DefaultHandler {
       pm.rcBmp.right = pm.rcBmp.left + pm.size.width;
       pm.size.height = Integer.parseInt(ary[3]);
       pm.rcBmp.bottom = pm.rcBmp.top + pm.size.height;
-      pm.ptCenter.x = pm.size.width / 2;
-      pm.ptCenter.y = pm.size.height / 2;
     } else if (tag.equals(MOVE_FROM)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
@@ -152,35 +151,37 @@ public class XmlHandler extends DefaultHandler {
         pm.areaTo.w = Integer.parseInt(ary[2]);
       }
       pm.areaTo.h = Integer.parseInt(ary[3]);
+    } else if (tag.equals(MOVE_INTERPOLATOR)) {
+      ParticleModel pm = scene.getLastParticleModel();
+      String[] ary = ParticleTool.getAry(bd.toString());
+      pm.interpolator[0] = Integer.parseInt(ary[0]);
+      pm.interpolator[1] = Integer.parseInt(ary[1]);
     } else if (tag.equals(ROTATE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
       pm.rotateBegin.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
-      if (ary[2].contains(OFFSET)) {
-        pm.rotateOffset = true;
-        ary[2] = ary[2].replace(OFFSET, NONE);
+      if (ary.length == 6) {
+        pm.rotateEnd.set(Integer.parseInt(ary[2]), Integer.parseInt(ary[3]));
+        pm.ptRotate.x = Integer.parseInt(ary[4]);
+        pm.ptRotate.y = Integer.parseInt(ary[5]);
       } else {
-        pm.rotateOffset = false;
+        pm.rotateEnd = null;
+        pm.ptRotate.x = Integer.parseInt(ary[2]);
+        pm.ptRotate.y = Integer.parseInt(ary[3]);
       }
-      if (ary[3].contains(OFFSET)) {
-        pm.rotateOffset = true;
-        ary[3] = ary[3].replace(OFFSET, NONE);
-      } else {
-        pm.rotateOffset = false;
-      }
-      pm.rotateEnd.set(Integer.parseInt(ary[2]), Integer.parseInt(ary[3]));
-      pm.ptRotate.x = Integer.parseInt(ary[4]);
-      pm.ptRotate.y = Integer.parseInt(ary[5]);
     } else if (tag.equals(ALPHA)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
       pm.alpha.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
-      pm.alphaDuration.set(Float.parseFloat(ary[2]), Float.parseFloat(ary[3]));
     } else if (tag.equals(SCALE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
       pm.scaleBegin.set(Float.parseFloat(ary[0]), Float.parseFloat(ary[1]));
-      pm.scaleEnd.set(Float.parseFloat(ary[2]), Float.parseFloat(ary[3]));
+      if (ary.length == 4) {
+        pm.scaleEnd.set(Float.parseFloat(ary[2]), Float.parseFloat(ary[3]));
+      } else {
+        pm.scaleEnd = null;
+      }
     }
   }
 }

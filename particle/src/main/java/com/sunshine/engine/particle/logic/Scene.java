@@ -208,7 +208,7 @@ public class Scene {
 
   public void setBmp(final Bitmap bitmap) {
     helper.post(
-        new Runnable(){
+        new Runnable() {
           @Override
           public void run() {
             bmp = bitmap;

@@ -86,22 +86,6 @@ public class ParticleTool {
     }
   }
 
-  public static float getAppearValue(float from, float to, float percent) {
-    return from + (to - from) * percent;
-  }
-
-  public static float getDisappearValue(float from, float to, float percent) {
-    return from + (to - from) * percent;
-  }
-
-  public static int getAppearValue(int from, int to, float percent) {
-    return from + (int) ((to - from) * percent);
-  }
-
-  public static int getDisappearValue(int from, int to, float percent) {
-    return from + (int) ((to - from) * percent);
-  }
-
   public static boolean isInRange(float f, float min, float max) {
     if (ParticleTool.equalsFloat(f, min) || ParticleTool.equalsFloat(f, max)) {
       return true;

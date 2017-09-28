@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     sceneView = (SceneView) findViewById(R.id.scene);
-		sceneView.playByAsset("particle/snow2");
+		sceneView.playByAsset("particle/christmasTree");
   }
 
 	@Override

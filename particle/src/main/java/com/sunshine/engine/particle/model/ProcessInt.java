@@ -16,6 +16,6 @@ public class ProcessInt extends ProcessObj<Integer> {
 
   @Override
   public Integer get(float percent) {
-    return from + (int) (delta * percent);
+    return from + (int) (delta * timeInterpolator.getInterpolation(percent));
   }
 }
