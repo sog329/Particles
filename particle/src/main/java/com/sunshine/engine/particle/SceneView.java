@@ -6,10 +6,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.sunshine.engine.particle.logic.SceneViewHelper;
+import com.sunshine.engine.particle.logic.ViewHelper;
 
 public class SceneView extends View {
-  private SceneViewHelper sceneViewHelper = new SceneViewHelper(this);
+  private ViewHelper mViewHelper = new ViewHelper(this);
 
   public SceneView(Context context) {
     super(context);
@@ -24,21 +24,21 @@ public class SceneView extends View {
   }
 
   public void playByAsset(String folderPath) {
-    sceneViewHelper.play(folderPath, true);
+    mViewHelper.play(folderPath, true);
   }
 
   public void play(String folderPath) {
-    sceneViewHelper.play(folderPath, false);
+    mViewHelper.play(folderPath, false);
   }
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
     super.onLayout(changed, left, top, right, bottom);
-    sceneViewHelper.resize(left, top, right, bottom);
+    mViewHelper.resize(left, top, right, bottom);
   }
 
   public void stop() {
-    sceneViewHelper.stop();
+    mViewHelper.stop();
   }
 
   @Override
@@ -49,10 +49,6 @@ public class SceneView extends View {
   @Override
   protected void onDraw(Canvas can) {
     super.onDraw(can);
-    sceneViewHelper.drawSelf(this, can);
-  }
-
-  public void stop(String folderPath) {
-    sceneViewHelper.stop(folderPath);
+    mViewHelper.drawSelf(this, can);
   }
 }

@@ -19,26 +19,28 @@ public class XmlHandler extends DefaultHandler {
   private Scene scene = null;
   private StringBuilder bd = null;
 
-  public static final String NONE = "";
+  private static final String NONE = "";
 
-  public static final String WIDTH_HEIGHT = "width_height";
-  public static final String MAX = "max";
+  private static final String WIDTH_HEIGHT = "width_height";
+  private static final String MAX = "max";
 
-  public static final String MODEL = "model";
-  public static final String CHANCE_RANGE = "chance_range";
-  public static final String ACTIVE_TIME = "active_time";
-  public static final String SRC_LTWH = "src_ltwh";
+  private static final String MODEL = "model";
+  private static final String CHANCE_RANGE = "chance_range";
+  private static final String ACTIVE_TIME = "active_time";
+  private static final String SRC_LTWH = "src_ltwh";
+  private static final String LAYOUT_TYPE = "layout_type";
+  private static final String DURATION = "duration";
 
-  public static final String MOVE_FROM = "move_from";
-  public static final String MOVE_TO = "move_to";
-  public static final String MOVE_INTERPOLATOR = "move_interpolator";
-  public static final String MATCH_PARENT = "match_parent";
-  public static final String OFFSET = "offset:";
+  private static final String MOVE_FROM = "move_from";
+  private static final String MOVE_TO = "move_to";
+  private static final String MOVE_INTERPOLATOR = "move_interpolator";
+  private static final String MATCH_PARENT = "match_parent";
+  private static final String OFFSET = "offset:";
 
-  public static final String ROTATE = "rotate";
-  public static final String ALPHA = "alpha";
-  public static final String ALPHA_INTERPOLATOR = "alpha_interpolator";
-  public static final String SCALE = "scale";
+  private static final String ROTATE = "rotate";
+  private static final String ALPHA = "alpha";
+  private static final String ALPHA_INTERPOLATOR = "alpha_interpolator";
+  private static final String SCALE = "scale";
 
   public static boolean parse(InputStream is, Scene st) {
     boolean success = false;
@@ -99,6 +101,10 @@ public class XmlHandler extends DefaultHandler {
     } else if (tag.equals(MAX)) {
       int max = Integer.parseInt(bd.toString());
       scene.setMaxParticle(max);
+    } else if (tag.equals(DURATION)) {
+      scene.duration = Integer.parseInt(bd.toString());
+    } else if (tag.equals(LAYOUT_TYPE)) {
+      scene.layoutType = bd.toString();
     } else if (tag.equals(CHANCE_RANGE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
@@ -181,8 +187,7 @@ public class XmlHandler extends DefaultHandler {
       }
     } else if (tag.equals(ALPHA_INTERPOLATOR)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
-      pm.interpolatorAlpha = ary[0];
+      pm.interpolatorAlpha = bd.toString();
     } else if (tag.equals(SCALE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());

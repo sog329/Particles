@@ -7,6 +7,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.os.Looper;
 
 import com.sunshine.engine.particle.model.Area;
+import com.sunshine.engine.particle.model.ProcessFloat;
 import com.sunshine.engine.particle.model.Size;
 import com.sunshine.engine.particle.util.ParticleConfig;
 import com.sunshine.engine.particle.util.ParticleTool;
@@ -15,8 +16,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_SPRING;
+import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_BOTTOM;
+import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_CENTER;
+import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_TOP;
+
 public class Scene {
-  protected SceneViewHelper helper = null;
+  protected ViewHelper helper = null;
   private int maxParticle = 0;
   public List<Particle> lstIdleParticle = new ArrayList<>();
   public List<Particle> lstActiveParticle = new ArrayList<>();
@@ -33,12 +39,16 @@ public class Scene {
   public Size scriptSize = new Size(720, 1080);
   public Area viewArea = new Area();
   public Area drawArea = new Area();
+  public String layoutType = LAYOUT_CENTER;
+  public int duration = 6000;
+  private long firstDrawTime = ParticleConfig.NONE;
+  private ProcessFloat intensity = new ProcessFloat(0f, 1f, INTERPOLATOR_SPRING);
 
   static {
     pt.setAntiAlias(true);
   }
 
-  public Scene(SceneViewHelper helper, String folderPath, boolean isAsset) {
+  public Scene(ViewHelper helper, String folderPath, boolean isAsset) {
     this.folderPath = folderPath;
     this.isAsset = isAsset;
     this.helper = helper;
@@ -85,7 +95,15 @@ public class Scene {
     drawArea.w = (int) (scale * scriptSize.width);
     drawArea.h = (int) (scale * scriptSize.height);
     drawArea.l = (viewArea.w - drawArea.w) / 2 + viewArea.l;
-    drawArea.t = (viewArea.h - drawArea.h) / 2 + viewArea.t;
+    if (LAYOUT_CENTER.equals(layoutType)) {
+      drawArea.t = (viewArea.h - drawArea.h) / 2 + viewArea.t;
+    } else if (LAYOUT_TOP.equals(layoutType)) {
+      drawArea.t = viewArea.t;
+    } else if (LAYOUT_BOTTOM.equals(layoutType)) {
+      drawArea.t = viewArea.h - drawArea.h + viewArea.t;
+    } else {
+      drawArea.t = (viewArea.h - drawArea.h) / 2 + viewArea.t;
+    }
   }
 
   protected void resize(int width, int height, int left, int top) {
@@ -103,14 +121,22 @@ public class Scene {
     if (bmp == null) {
       return false;
     } else {
-      buildActiveParticle(dt);
+      if (firstDrawTime == 0) {
+        firstDrawTime = ParticleTool.getTime();
+      }
+      float percent = 1f * (ParticleTool.getTime() - firstDrawTime) / duration;
+      buildActiveParticle(dt, percent);
       renderActiveParticle(can, bmp, dt);
+      if (percent > 1 && lstActiveParticle.size() == 0) {
+        destroy();
+      }
       return true;
     }
   }
 
-  private void buildActiveParticle(long dt) {
-    if (maxParticle > lstActiveParticle.size()) {
+  private void buildActiveParticle(long dt, float percent) {
+    int numActive = (int) (intensity.get(percent) * maxParticle);
+    if (numActive > lstActiveParticle.size()) {
       int num = maxParticle - lstActiveParticle.size();
       if (judgeBorn(num)) {
         // 产生粒子
@@ -118,7 +144,7 @@ public class Scene {
           int dValue = lstIdleParticle.size();
           if (dValue > 0) {
             Particle p = lstIdleParticle.get(0);
-            lastBornTime = System.currentTimeMillis();
+            lastBornTime = ParticleTool.getTime();
             ParticleModel pm = null;
             if (lstParticleModel.size() == 1) {
               pm = lstParticleModel.get(0);
@@ -170,7 +196,7 @@ public class Scene {
         bmp.recycle();
         bmp = null;
       }
-      helper.lstScene.remove(this);
+      helper.scene = null;
     } else {
       helper.post(
           new Runnable() {
@@ -187,7 +213,7 @@ public class Scene {
     if (n > ParticleConfig.N_BORN) {
       b = true;
     } else {
-      long now = System.currentTimeMillis();
+      long now = ParticleTool.getTime();
       if (Math.abs(now - lastBornTime) >= interval) {
         b = true;
       }

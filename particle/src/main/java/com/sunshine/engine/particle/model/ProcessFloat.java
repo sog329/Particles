@@ -3,8 +3,13 @@ package com.sunshine.engine.particle.model;
 /** Created by songxiaoguang on 2017/9/13. */
 public class ProcessFloat extends ProcessObj<Float> {
 
-  public ProcessFloat(float from, float to) {
-    set(from, to);
+
+  public ProcessFloat(Float from, Float to) {
+    super(from, to);
+  }
+
+  public ProcessFloat(Float from, Float to, String type) {
+    super(from, to, type);
   }
 
   @Override

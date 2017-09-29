@@ -3,8 +3,13 @@ package com.sunshine.engine.particle.model;
 /** Created by songxiaoguang on 2017/9/13. */
 public class ProcessInt extends ProcessObj<Integer> {
 
-  public ProcessInt(int from, int to) {
-    set(from, to);
+
+  public ProcessInt(Integer from, Integer to) {
+    super(from, to);
+  }
+
+  public ProcessInt(Integer from, Integer to, String type) {
+    super(from, to, type);
   }
 
   @Override

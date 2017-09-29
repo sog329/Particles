@@ -2,13 +2,31 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.demo.particles.MainActivity">
 
+    <Button
+        android:alpha=".5"
+        android:layout_alignParentTop="true"
+        android:id="@+id/christmasTree"
+        android:text="抛物线"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:alpha=".5"
+        android:layout_below="@id/christmasTree"
+        android:id="@+id/snow2"
+        android:text="snow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
     <com.sunshine.engine.particle.SceneView
-        android:background="#000000"
         android:id="@+id/scene"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
+
 </RelativeLayout>

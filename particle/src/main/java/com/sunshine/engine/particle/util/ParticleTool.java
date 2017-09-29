@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.SystemClock;
 
 import java.io.File;
 import java.io.InputStream;
@@ -92,5 +93,9 @@ public class ParticleTool {
     } else {
       return f > min && f < max;
     }
+  }
+
+  public static long getTime() {
+    return SystemClock.elapsedRealtime();
   }
 }

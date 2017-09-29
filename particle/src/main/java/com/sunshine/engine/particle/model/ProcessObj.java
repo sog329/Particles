@@ -15,6 +15,15 @@ public abstract class ProcessObj<T> {
   protected T delta;
   protected TimeInterpolator timeInterpolator = new LinearInterpolator();
 
+  public ProcessObj(T from, T to) {
+    set(from, to);
+  }
+
+  public ProcessObj(T from, T to, String type) {
+    set(from, to);
+    setInterpolator(type);
+  }
+
   public abstract void set(T from, T to);
 
   public abstract T get(float percent);
