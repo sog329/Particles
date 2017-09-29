@@ -5,22 +5,22 @@
     <max>13</max>
     <model>
         <chance_range>0,.4</chance_range>
-		<active_time>8000,13000</active_time><!-- min,max -->
+		<active_time>8000,13000</active_time>
         <src_ltwh>0,0,19,20</src_ltwh>
-		<move_from>0,0,990,1280</move_from><!-- left,top,w,h -->
-		<move_to>0,0,990,1280</move_to><!-- left,top,w,h -->
-        <rotate>0,100,500,600,5,15</rotate><!-- minfrom,maxfrom,minTo,maxTo,rtX,rtY -->
-		<alpha>150,255,.1,.9</alpha><!-- min,max -->
-		<scale>1.5,2,1,1</scale><!-- minfrom,maxfrom,minTo,maxTo -->
+		<move_from>0,0,990,1280</move_from>
+		<move_to>0,0,990,1280</move_to>
+        <rotate>0,100,500,600,5,15</rotate>
+		<alpha>150,255</alpha>
+		<scale>1.5,2,1,1</scale>
     </model>
     <model>
         <chance_range>.4,1</chance_range>
-		<active_time>5000,9000</active_time><!-- min,max -->
+		<active_time>5000,9000</active_time>
         <src_ltwh>21,0,19,18</src_ltwh>
-		<move_from>0,0,990,1280</move_from><!-- left,top,w,h -->
-		<move_to>0,0,990,1280</move_to><!-- left,top,w,h -->
-        <rotate>0,100,500,600,8,2</rotate><!-- minfrom,maxfrom,minTo,maxTo,rtX,rtY -->
-		<alpha>150,255,.1,.9</alpha><!-- min,max -->
-		<scale>1.5,2.5,1,1</scale><!-- minfrom,maxfrom,minTo,maxTo -->
+		<move_from>0,0,990,1280</move_from>
+		<move_to>0,0,990,1280</move_to>
+        <rotate>0,100,500,600,8,2</rotate>
+		<alpha>150,255</alpha>
+		<scale>1.5,2.5,1,1</scale>
     </model>
 </scene>

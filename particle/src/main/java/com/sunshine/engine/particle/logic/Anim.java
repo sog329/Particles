@@ -14,7 +14,7 @@ public class Anim {
   protected Point ptRotate = new Point(0, 0);
   protected ProcessInt rotate = new ProcessInt(0, 0);
   protected ProcessFloat scale = new ProcessFloat(1f, 1f);
-  protected int alpha = 255;
+  protected ProcessInt alpha = new ProcessInt(50, 255);
 
   public void runAnimation(float percent, DrawInfo drawInfo) {
     if (percent < 0) {
@@ -38,6 +38,6 @@ public class Anim {
     drawInfo.srcRx = drawInfo.rcSrc.left + (int) (ptRotate.x * s);
     drawInfo.srcRy = drawInfo.rcSrc.top + (int) (ptRotate.y * s);
 
-    drawInfo.alpha = alpha;
+    drawInfo.alpha = alpha.get(percent);
   }
 }

@@ -37,6 +37,7 @@ public class XmlHandler extends DefaultHandler {
 
   public static final String ROTATE = "rotate";
   public static final String ALPHA = "alpha";
+  public static final String ALPHA_INTERPOLATOR = "alpha_interpolator";
   public static final String SCALE = "scale";
 
   public static boolean parse(InputStream is, Scene st) {
@@ -154,8 +155,8 @@ public class XmlHandler extends DefaultHandler {
     } else if (tag.equals(MOVE_INTERPOLATOR)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
-      pm.interpolator[0] = Integer.parseInt(ary[0]);
-      pm.interpolator[1] = Integer.parseInt(ary[1]);
+      pm.interpolatorMove[0] = ary[0];
+      pm.interpolatorMove[1] = ary[1];
     } else if (tag.equals(ROTATE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
@@ -172,7 +173,16 @@ public class XmlHandler extends DefaultHandler {
     } else if (tag.equals(ALPHA)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());
-      pm.alpha.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
+      pm.alphaBegin.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
+      if (ary.length == 2) {
+        pm.alphaEnd = null;
+      } else {
+        pm.alphaEnd.set(Integer.parseInt(ary[2]), Integer.parseInt(ary[3]));
+      }
+    } else if (tag.equals(ALPHA_INTERPOLATOR)) {
+      ParticleModel pm = scene.getLastParticleModel();
+      String[] ary = ParticleTool.getAry(bd.toString());
+      pm.interpolatorAlpha = ary[0];
     } else if (tag.equals(SCALE)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = ParticleTool.getAry(bd.toString());

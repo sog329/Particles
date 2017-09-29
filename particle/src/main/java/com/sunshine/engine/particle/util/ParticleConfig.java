@@ -11,4 +11,9 @@ public class ParticleConfig {
 	public static final int N_LIFE = 4; // 排队如果>4个，立即显示出非出生状态的粒子
 	public static final int RENDER_INTERVAL = 16; // ms
 	public static final int MAX_PER_FRAME = 1; // 每帧最多产生n个粒子
+
+	public static final String INTERPOLATOR_LINEAR = "Linear";
+	public static final String INTERPOLATOR_ACCELERATE = "Accelerate";
+	public static final String INTERPOLATOR_DECELERATE = "Decelerate";
+	public static final String INTERPOLATOR_SPRING = "Spring";
 }
