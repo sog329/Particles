@@ -9,8 +9,8 @@
         <chance_range>0,.6</chance_range>
         <active_time>1700,2100</active_time>
         <src_ltwh>64,42,52,62</src_ltwh>
-        <move_from>0,720,360,10</move_from>
-        <move_to>360,0,360,180</move_to>
+        <move_from>0,720,270,10</move_from>
+        <move_to>270,0,450,180</move_to>
         <move_interpolator>linear,spring</move_interpolator>
         <rotate>0,20,130,180,26,26</rotate>
         <alpha>0,0,255,255</alpha>

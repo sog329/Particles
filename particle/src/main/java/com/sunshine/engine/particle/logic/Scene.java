@@ -121,7 +121,7 @@ public class Scene {
     if (bmp == null) {
       return false;
     } else {
-      if (firstDrawTime == 0) {
+      if (firstDrawTime == ParticleConfig.NONE) {
         firstDrawTime = ParticleTool.getTime();
       }
       float percent = 1f * (ParticleTool.getTime() - firstDrawTime) / duration;
