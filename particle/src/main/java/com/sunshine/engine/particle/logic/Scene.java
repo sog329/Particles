@@ -124,7 +124,7 @@ public class Scene {
       if (firstDrawTime == ParticleConfig.NONE) {
         firstDrawTime = ParticleTool.getTime();
       }
-      float percent = 1f * (ParticleTool.getTime() - firstDrawTime) / duration;
+      float percent = (float) (ParticleTool.getTime() - firstDrawTime) / duration;
       buildActiveParticle(dt, percent);
       renderActiveParticle(can, bmp, dt);
       if (percent > 1 && lstActiveParticle.size() == 0) {
