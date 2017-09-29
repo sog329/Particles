@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
-import android.os.Looper;
 
 import com.sunshine.engine.particle.model.Area;
 import com.sunshine.engine.particle.model.ProcessFloat;
@@ -128,7 +127,7 @@ public class Scene {
       buildActiveParticle(dt, percent);
       renderActiveParticle(can, bmp, dt);
       if (percent > 1 && lstActiveParticle.size() == 0) {
-        destroy();
+        helper.stop();
       }
       return true;
     }
@@ -190,21 +189,10 @@ public class Scene {
     can.restoreToCount(cs);
   }
 
-  public void destroy() {
-    if (Looper.getMainLooper() == Looper.myLooper()) {
-      if (bmp != null) {
-        bmp.recycle();
-        bmp = null;
-      }
-      helper.scene = null;
-    } else {
-      helper.post(
-          new Runnable() {
-            @Override
-            public void run() {
-              destroy();
-            }
-          });
+  protected void destroy() {
+    if (bmp != null) {
+      bmp.recycle();
+      bmp = null;
     }
   }
 
@@ -232,8 +220,8 @@ public class Scene {
     interval = sum / maxParticle;
   }
 
-  public void setBmp(final Bitmap bitmap) {
-    helper.post(
+  public void setBmpAsync(final Bitmap bitmap) {
+    ParticleTool.post(
         new Runnable() {
           @Override
           public void run() {

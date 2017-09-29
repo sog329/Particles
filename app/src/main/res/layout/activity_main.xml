@@ -2,26 +2,74 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context="com.demo.particles.MainActivity">
 
     <Button
-        android:alpha=".5"
-        android:layout_alignParentTop="true"
         android:id="@+id/christmasTree"
-        android:text="抛物线"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:alpha=".5"
+        android:text="抛物线"/>
 
     <Button
-        android:alpha=".5"
-        android:layout_below="@id/christmasTree"
         android:id="@+id/snow2"
-        android:text="snow2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/christmasTree"
+        android:alpha=".5"
+        android:text="snow2"/>
+
+    <Button
+        android:id="@+id/flower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/snow2"
+        android:alpha=".5"
+        android:text="flower"/>
+
+    <Button
+        android:id="@+id/rain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flower"
+        android:alpha=".5"
+        android:text="rain"/>
+
+    <Button
+        android:id="@+id/smallFlower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rain"
+        android:alpha=".5"
+        android:text="smallFlower"/>
+
+    <Button
+        android:id="@+id/snow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/smallFlower"
+        android:alpha=".5"
+        android:text="snow"/>
+
+    <Button
+        android:id="@+id/snow3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/snow"
+        android:alpha=".5"
+        android:text="snow3"/>
+
+    <Button
+        android:id="@+id/star"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/snow3"
+        android:alpha=".5"
+        android:text="star"/>
 
 
     <com.sunshine.engine.particle.SceneView

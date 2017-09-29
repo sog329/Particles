@@ -8,32 +8,26 @@ import com.sunshine.engine.particle.model.Area;
 import com.sunshine.engine.particle.util.ParticleConfig;
 import com.sunshine.engine.particle.util.ParticleTool;
 
-import java.lang.ref.WeakReference;
-
 import static com.sunshine.engine.particle.util.ParticleConfig.RENDER_INTERVAL;
 
 public class ViewHelper {
   protected Scene scene = null;
   private Area viewArea = new Area();
   private long drawTime = ParticleConfig.NONE;
-  protected WeakReference<View> wrView = null;
+  private View view = null;
   protected Runnable rnRequestRender =
       new Runnable() {
         @Override
         public void run() {
-          View view = wrView.get();
           if (view != null) {
             view.invalidate();
           }
         }
       };
 
-  public ViewHelper(View view) {
-    wrView = new WeakReference(view);
-  }
-
-  public void play(String folderPath, boolean isAsset) {
+  public void play(View v, String folderPath, boolean isAsset) {
     if (scene == null) {
+      view = v;
       scene = new Scene(this, folderPath, isAsset);
       scene.resize(viewArea.w, viewArea.h, viewArea.l, viewArea.t);
       SceneBuilder.load(scene);
@@ -53,11 +47,24 @@ public class ViewHelper {
   public void stop() {
     if (scene != null) {
       scene.destroy();
+      scene = null;
     }
-    View view = wrView.get();
     if (view != null) {
       view.removeCallbacks(rnRequestRender);
+      view = null;
     }
+  }
+
+  public void stopAsync(final Scene sc) {
+    ParticleTool.post(
+        new Runnable() {
+          @Override
+          public void run() {
+            if (sc != null && sc.equals(scene)) {
+              stop();
+            }
+          }
+        });
   }
 
   public void drawSelf(View view, Canvas can) {
@@ -76,16 +83,8 @@ public class ViewHelper {
     }
   }
 
-  protected void post(Runnable runnable) {
-    View view = wrView.get();
-    if (view != null) {
-      view.post(runnable);
-    }
-  }
-
   protected Context getContext() {
     Context context = null;
-    View view = wrView.get();
     if (view != null) {
       context = view.getContext();
     }

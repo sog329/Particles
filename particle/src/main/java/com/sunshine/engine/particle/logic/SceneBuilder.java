@@ -65,8 +65,8 @@ public class SceneBuilder {
             } else {
               bmp = BitmapFactory.decodeFile(ParticleTool.getPicPath(scene.folderPath));
             }
-            scene.setBmp(bmp);
             if (bmp != null) {
+              scene.setBmpAsync(bmp);
               success = true;
             }
           }
@@ -81,7 +81,7 @@ public class SceneBuilder {
             }
           }
           if (!success) {
-            scene.destroy();
+            scene.helper.stopAsync(scene);
           }
         }
         scene = getScene();

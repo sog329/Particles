@@ -9,7 +9,7 @@ import android.view.View;
 import com.sunshine.engine.particle.logic.ViewHelper;
 
 public class SceneView extends View {
-  private ViewHelper mViewHelper = new ViewHelper(this);
+  private ViewHelper mViewHelper = new ViewHelper();
 
   public SceneView(Context context) {
     super(context);
@@ -24,11 +24,11 @@ public class SceneView extends View {
   }
 
   public void playByAsset(String folderPath) {
-    mViewHelper.play(folderPath, true);
+    mViewHelper.play(this, folderPath, true);
   }
 
   public void play(String folderPath) {
-    mViewHelper.play(folderPath, false);
+    mViewHelper.play(this, folderPath, false);
   }
 
   @Override

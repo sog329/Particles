@@ -9,7 +9,7 @@
         <src_ltwh>0,0,5,80</src_ltwh>
         <move_from>-50,-10,match_parent,10</move_from>
         <move_to>offset:50,1270,60,10</move_to>
-        <rotate>-10,-5,offset:0,offset:0,1,1</rotate>
+        <rotate>-10,-5,1,1</rotate>
         <alpha>100,150</alpha>
         <scale>1,1</scale>
     </model>
@@ -19,7 +19,7 @@
         <src_ltwh>0,0,5,80</src_ltwh>
         <move_from>-50,-10,match_parent,10</move_from>
         <move_to>offset:50,1270,60,10</move_to>
-        <rotate>-10,-5,offset:0,offset:0,1,1</rotate>
+        <rotate>-10,-5,1,1</rotate>
         <alpha>50,100</alpha>
         <scale>.5,1</scale>
     </model>
