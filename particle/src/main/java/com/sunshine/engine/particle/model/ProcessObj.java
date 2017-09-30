@@ -4,12 +4,14 @@ import android.animation.TimeInterpolator;
 
 import com.sunshine.engine.particle.logic.Interpolator;
 
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_LINEAR;
+
 /** Created by songxiaoguang on 2017/9/13. */
 public abstract class ProcessObj<T> {
   protected T from;
   protected T to;
   protected T delta;
-  protected TimeInterpolator interpolator = Interpolator.build(null);
+  protected TimeInterpolator interpolator = Interpolator.build(INTERPOLATOR_LINEAR);
 
   public ProcessObj(T from, T to) {
     set(from, to);
