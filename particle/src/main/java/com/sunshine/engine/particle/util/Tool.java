@@ -11,12 +11,12 @@ import android.os.SystemClock;
 import java.io.File;
 import java.io.InputStream;
 
-import static com.sunshine.engine.particle.util.ParticleConfig.PIC_NAME;
-import static com.sunshine.engine.particle.util.ParticleConfig.SCRIPT_NAME;
-import static com.sunshine.engine.particle.util.ParticleConfig.SEPARATOR;
-import static com.sunshine.engine.particle.util.ParticleConfig.ZERO_FLOAT;
+import static com.sunshine.engine.particle.util.Config.PIC_NAME;
+import static com.sunshine.engine.particle.util.Config.SCRIPT_NAME;
+import static com.sunshine.engine.particle.util.Config.SEPARATOR;
+import static com.sunshine.engine.particle.util.Config.ZERO_FLOAT;
 
-public class ParticleTool {
+public class Tool {
   private static final Handler handler = new Handler(Looper.getMainLooper());
 
   public static String getScriptPath(String folderPath) {
@@ -91,7 +91,7 @@ public class ParticleTool {
   }
 
   public static boolean isInRange(float f, float min, float max) {
-    if (ParticleTool.equalsFloat(f, min) || ParticleTool.equalsFloat(f, max)) {
+    if (Tool.equalsFloat(f, min) || Tool.equalsFloat(f, max)) {
       return true;
     } else {
       return f > min && f < max;

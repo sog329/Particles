@@ -5,15 +5,15 @@ import android.graphics.Canvas;
 import android.view.View;
 
 import com.sunshine.engine.particle.model.Area;
-import com.sunshine.engine.particle.util.ParticleConfig;
-import com.sunshine.engine.particle.util.ParticleTool;
+import com.sunshine.engine.particle.util.Config;
+import com.sunshine.engine.particle.util.Tool;
 
-import static com.sunshine.engine.particle.util.ParticleConfig.RENDER_INTERVAL;
+import static com.sunshine.engine.particle.util.Config.RENDER_INTERVAL;
 
 public class ViewHelper {
   protected Scene scene = null;
   private Area viewArea = new Area();
-  private long drawTime = ParticleConfig.NONE;
+  private long drawTime = Config.NONE;
   private View view = null;
   protected Runnable rnRequestRender =
       new Runnable() {
@@ -56,7 +56,7 @@ public class ViewHelper {
   }
 
   public void stopAsync(final Scene sc) {
-    ParticleTool.post(
+    Tool.post(
         new Runnable() {
           @Override
           public void run() {
@@ -69,10 +69,10 @@ public class ViewHelper {
 
   public void drawSelf(View view, Canvas can) {
     if (scene != null) {
-      drawTime = ParticleTool.getTime();
+      drawTime = Tool.getTime();
       boolean needRender = scene.draw(can, drawTime);
       if (needRender) {
-        int nextRenderTime = RENDER_INTERVAL - (int) (ParticleTool.getTime() - drawTime);
+        int nextRenderTime = RENDER_INTERVAL - (int) (Tool.getTime() - drawTime);
         view.removeCallbacks(rnRequestRender);
         if (nextRenderTime <= 0) {
           view.invalidate();

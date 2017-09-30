@@ -1,7 +1,7 @@
 package com.sunshine.engine.particle.util;
 
 /** Created by songxiaoguang on 2017/9/14. */
-public class ParticleConfig {
+public class Config {
   public static final long NONE = -1l;
   public static final float ZERO_FLOAT = 0f;
   public static final String SCRIPT_NAME = "config.xml";

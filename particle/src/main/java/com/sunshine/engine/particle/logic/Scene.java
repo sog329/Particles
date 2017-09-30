@@ -8,17 +8,17 @@ import android.graphics.PaintFlagsDrawFilter;
 import com.sunshine.engine.particle.model.Area;
 import com.sunshine.engine.particle.model.ProcessFloat;
 import com.sunshine.engine.particle.model.Size;
-import com.sunshine.engine.particle.util.ParticleConfig;
-import com.sunshine.engine.particle.util.ParticleTool;
+import com.sunshine.engine.particle.util.Config;
+import com.sunshine.engine.particle.util.Tool;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_SPRING;
-import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_BOTTOM;
-import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_CENTER;
-import static com.sunshine.engine.particle.util.ParticleConfig.LAYOUT_TOP;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SPRING;
+import static com.sunshine.engine.particle.util.Config.LAYOUT_BOTTOM;
+import static com.sunshine.engine.particle.util.Config.LAYOUT_CENTER;
+import static com.sunshine.engine.particle.util.Config.LAYOUT_TOP;
 
 public class Scene {
   protected ViewHelper helper = null;
@@ -33,14 +33,14 @@ public class Scene {
   private static final PaintFlagsDrawFilter pd =
       new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
   public float scale = 0f;
-  private long interval = ParticleConfig.NONE;
-  private long lastBornTime = ParticleConfig.NONE;
+  private long interval = Config.NONE;
+  private long lastBornTime = Config.NONE;
   public Size scriptSize = new Size(720, 1080);
   public Area viewArea = new Area();
   public Area drawArea = new Area();
   public String layoutType = LAYOUT_CENTER;
   public int duration = 6000;
-  private long firstDrawTime = ParticleConfig.NONE;
+  private long firstDrawTime = Config.NONE;
   private ProcessFloat intensity = new ProcessFloat(0f, 1f, INTERPOLATOR_SPRING);
 
   static {
@@ -114,16 +114,16 @@ public class Scene {
   }
 
   protected boolean draw(Canvas can, long dt) {
-    if (ParticleTool.equalsZero(scale)) {
+    if (Tool.equalsZero(scale)) {
       return false;
     }
     if (bmp == null) {
       return false;
     } else {
-      if (firstDrawTime == ParticleConfig.NONE) {
-        firstDrawTime = ParticleTool.getTime();
+      if (firstDrawTime == Config.NONE) {
+        firstDrawTime = Tool.getTime();
       }
-      float percent = (float) (ParticleTool.getTime() - firstDrawTime) / duration;
+      float percent = (float) (Tool.getTime() - firstDrawTime) / duration;
       buildActiveParticle(dt, percent);
       renderActiveParticle(can, bmp, dt);
       if (percent > 1 && lstActiveParticle.size() == 0) {
@@ -139,11 +139,11 @@ public class Scene {
       int num = maxParticle - lstActiveParticle.size();
       if (judgeBorn(num)) {
         // 产生粒子
-        for (int i = 0; i < ParticleConfig.MAX_PER_FRAME; i++) {
+        for (int i = 0; i < Config.MAX_PER_FRAME; i++) {
           int dValue = lstIdleParticle.size();
           if (dValue > 0) {
             Particle p = lstIdleParticle.get(0);
-            lastBornTime = ParticleTool.getTime();
+            lastBornTime = Tool.getTime();
             ParticleModel pm = null;
             if (lstParticleModel.size() == 1) {
               pm = lstParticleModel.get(0);
@@ -152,7 +152,7 @@ public class Scene {
               for (int j = 0; j < lstParticleModel.size(); j++) {
                 pm = lstParticleModel.get(j);
                 if (pm != null
-                    && ParticleTool.isInRange(
+                    && Tool.isInRange(
                         random, pm.chanceRange.getFrom(), pm.chanceRange.getTo())) {
                   break;
                 }
@@ -160,7 +160,7 @@ public class Scene {
             }
             if (pm != null) {
               pm.build(this, p);
-              if (dValue > ParticleConfig.N_LIFE) { // 一次要增加过多
+              if (dValue > Config.N_LIFE) { // 一次要增加过多
                 p.activeTimeStart = dt - (long) (p.activeTimeDuration * Math.random());
               }
               lstIdleParticle.remove(p);
@@ -198,10 +198,10 @@ public class Scene {
 
   private boolean judgeBorn(int n) {
     boolean b = false;
-    if (n > ParticleConfig.N_BORN) {
+    if (n > Config.N_BORN) {
       b = true;
     } else {
-      long now = ParticleTool.getTime();
+      long now = Tool.getTime();
       if (Math.abs(now - lastBornTime) >= interval) {
         b = true;
       }
@@ -221,7 +221,7 @@ public class Scene {
   }
 
   public void setBmpAsync(final Bitmap bitmap) {
-    ParticleTool.post(
+    Tool.post(
         new Runnable() {
           @Override
           public void run() {

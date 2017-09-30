@@ -27,7 +27,7 @@
         <rotate>0,20,130,180,52,52</rotate>
         <alpha>0,0,255,255</alpha>
         <alpha_interpolator>spring</alpha_interpolator>
-        <scale>.5,1</scale>
+        <scale>.7,.9</scale>
     </model>
     <model>
         <chance_range>.8,1</chance_range>
@@ -39,6 +39,6 @@
         <rotate>0,20,130,180,52,52</rotate>
         <alpha>0,0,255,255</alpha>
         <alpha_interpolator>spring</alpha_interpolator>
-        <scale>.5,.8</scale>
+        <scale>.6,.8</scale>
     </model>
 </scene>

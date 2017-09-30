@@ -5,12 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.sunshine.engine.particle.model.DrawInfo;
-import com.sunshine.engine.particle.util.ParticleConfig;
+import com.sunshine.engine.particle.util.Config;
 
 public class Particle {
   private Scene scene = null;
   public long activeTimeDuration = 1000;
-  public long activeTimeStart = ParticleConfig.NONE;
+  public long activeTimeStart = Config.NONE;
   public Rect rcBmp = new Rect();
   protected DrawInfo drawInfo = new DrawInfo();
   protected Anim anim = new Anim();
@@ -41,7 +41,7 @@ public class Particle {
    * @return
    */
   protected boolean draw(Canvas can, Bitmap bmp, long drawTime) {
-    if (activeTimeStart == ParticleConfig.NONE) {
+    if (activeTimeStart == Config.NONE) {
       activeTimeStart = drawTime;
     }
     int activeTime = (int) (drawTime - activeTimeStart);
@@ -62,6 +62,6 @@ public class Particle {
   }
 
   protected void end() {
-    activeTimeStart = ParticleConfig.NONE;
+    activeTimeStart = Config.NONE;
   }
 }

@@ -5,23 +5,21 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.sunshine.engine.particle.util.ParticleConfig;
-import com.sunshine.engine.particle.util.SpringInterpolator;
-
-import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_ACCELERATE;
-import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_DECELERATE;
-import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_SPRING;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_ACCELERATE;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_DECELERATE;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_LINEAR;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SPRING;
 
 /** Created by songxiaoguang on 2017/9/30. */
-public class InterpolatorBuilder {
+public class Interpolator {
 
-  private static LinearInterpolator interpolatorLinear = null;
-  private static AccelerateInterpolator interpolatorAccelerate = null;
-  private static DecelerateInterpolator interpolatorDecelerate = null;
-  private static SpringInterpolator interpolatorSpring = null;
+  private static TimeInterpolator interpolatorLinear = null;
+  private static TimeInterpolator interpolatorAccelerate = null;
+  private static TimeInterpolator interpolatorDecelerate = null;
+  private static TimeInterpolator interpolatorSpring = null;
 
-  public static TimeInterpolator get(String type) {
-    if (ParticleConfig.INTERPOLATOR_LINEAR.equals(type)) {
+  public static TimeInterpolator build(String type) {
+    if (INTERPOLATOR_LINEAR.equals(type)) {
       if (interpolatorLinear == null) {
         interpolatorLinear = new LinearInterpolator();
       }
@@ -38,7 +36,13 @@ public class InterpolatorBuilder {
       return interpolatorDecelerate;
     } else if (INTERPOLATOR_SPRING.equals(type)) {
       if (interpolatorSpring == null) {
-        interpolatorSpring = new SpringInterpolator();
+        interpolatorSpring =
+            new TimeInterpolator() {
+              @Override
+              public float getInterpolation(float p) {
+                return 4 * p * (1 - p);
+              }
+            };
       }
       return interpolatorSpring;
     } else {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.sunshine.engine.particle.util.ParticleTool;
+import com.sunshine.engine.particle.util.Tool;
 import com.sunshine.engine.particle.util.XmlHandler;
 
 import java.io.File;
@@ -49,9 +49,9 @@ public class SceneBuilder {
           boolean readXml = false;
           if (scene.isAsset) {
             Context context = scene.helper.getContext();
-            is = context.getAssets().open(ParticleTool.getScriptPath(scene.folderPath));
+            is = context.getAssets().open(Tool.getScriptPath(scene.folderPath));
           } else {
-            File f = new File(ParticleTool.getScriptPath(scene.folderPath));
+            File f = new File(Tool.getScriptPath(scene.folderPath));
             is = new FileInputStream(f);
           }
           readXml = XmlHandler.parse(is, scene);
@@ -61,9 +61,9 @@ public class SceneBuilder {
             Bitmap bmp = null;
             if (scene.isAsset) {
               Context context = scene.helper.getContext();
-              bmp = ParticleTool.getBmpByAssets(context, ParticleTool.getPicPath(scene.folderPath));
+              bmp = Tool.getBmpByAssets(context, Tool.getPicPath(scene.folderPath));
             } else {
-              bmp = BitmapFactory.decodeFile(ParticleTool.getPicPath(scene.folderPath));
+              bmp = BitmapFactory.decodeFile(Tool.getPicPath(scene.folderPath));
             }
             if (bmp != null) {
               scene.setBmpAsync(bmp);

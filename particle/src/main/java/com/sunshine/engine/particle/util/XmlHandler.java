@@ -95,7 +95,7 @@ public class XmlHandler extends DefaultHandler {
     super.endElement(uri, localName, qName);
     String tag = localName.length() != 0 ? localName : qName;
     if (tag.equals(WIDTH_HEIGHT)) {
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       scene.scriptSize.width = Integer.parseInt(ary[0]);
       scene.scriptSize.height = Integer.parseInt(ary[1]);
     } else if (tag.equals(MAX)) {
@@ -107,15 +107,15 @@ public class XmlHandler extends DefaultHandler {
       scene.layoutType = bd.toString();
     } else if (tag.equals(CHANCE_RANGE)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.chanceRange.set(Float.parseFloat(ary[0]), Float.parseFloat(ary[1]));
     } else if (tag.equals(ACTIVE_TIME)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.activeTime.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
     } else if (tag.equals(SRC_LTWH)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.rcBmp.left = Integer.parseInt(ary[0]);
       pm.rcBmp.top = Integer.parseInt(ary[1]);
       pm.size.width = Integer.parseInt(ary[2]);
@@ -124,7 +124,7 @@ public class XmlHandler extends DefaultHandler {
       pm.rcBmp.bottom = pm.rcBmp.top + pm.size.height;
     } else if (tag.equals(MOVE_FROM)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.areaFrom.l = Integer.parseInt(ary[0]);
       pm.areaFrom.t = Integer.parseInt(ary[1]);
       if (MATCH_PARENT.equals(ary[2])) {
@@ -135,7 +135,7 @@ public class XmlHandler extends DefaultHandler {
       pm.areaFrom.h = Integer.parseInt(ary[3]);
     } else if (tag.equals(MOVE_TO)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       if (ary[0].contains(OFFSET)) {
         pm.areaTo.isOffsetLeft = true;
         ary[0] = ary[0].replace(OFFSET, NONE);
@@ -160,12 +160,12 @@ public class XmlHandler extends DefaultHandler {
       pm.areaTo.h = Integer.parseInt(ary[3]);
     } else if (tag.equals(MOVE_INTERPOLATOR)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.interpolatorMove[0] = ary[0];
       pm.interpolatorMove[1] = ary[1];
     } else if (tag.equals(ROTATE)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.rotateBegin.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
       if (ary.length == 6) {
         pm.rotateEnd.set(Integer.parseInt(ary[2]), Integer.parseInt(ary[3]));
@@ -178,7 +178,7 @@ public class XmlHandler extends DefaultHandler {
       }
     } else if (tag.equals(ALPHA)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.alphaBegin.set(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
       if (ary.length == 2) {
         pm.alphaEnd = null;
@@ -190,7 +190,7 @@ public class XmlHandler extends DefaultHandler {
       pm.interpolatorAlpha = bd.toString();
     } else if (tag.equals(SCALE)) {
       ParticleModel pm = scene.getLastParticleModel();
-      String[] ary = ParticleTool.getAry(bd.toString());
+      String[] ary = Tool.getAry(bd.toString());
       pm.scaleBegin.set(Float.parseFloat(ary[0]), Float.parseFloat(ary[1]));
       if (ary.length == 4) {
         pm.scaleEnd.set(Float.parseFloat(ary[2]), Float.parseFloat(ary[3]));

@@ -2,14 +2,14 @@ package com.sunshine.engine.particle.model;
 
 import android.animation.TimeInterpolator;
 
-import com.sunshine.engine.particle.logic.InterpolatorBuilder;
+import com.sunshine.engine.particle.logic.Interpolator;
 
 /** Created by songxiaoguang on 2017/9/13. */
 public abstract class ProcessObj<T> {
   protected T from;
   protected T to;
   protected T delta;
-  protected TimeInterpolator interpolator = InterpolatorBuilder.get(null);
+  protected TimeInterpolator interpolator = Interpolator.build(null);
 
   public ProcessObj(T from, T to) {
     set(from, to);
@@ -37,6 +37,6 @@ public abstract class ProcessObj<T> {
   }
 
   public void setInterpolator(String type) {
-    interpolator = InterpolatorBuilder.get(type);
+    interpolator = Interpolator.build(type);
   }
 }

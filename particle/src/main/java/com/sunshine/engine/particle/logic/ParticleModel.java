@@ -7,9 +7,9 @@ import com.sunshine.engine.particle.model.Area;
 import com.sunshine.engine.particle.model.ProcessFloat;
 import com.sunshine.engine.particle.model.ProcessInt;
 import com.sunshine.engine.particle.model.Size;
-import com.sunshine.engine.particle.util.ParticleConfig;
+import com.sunshine.engine.particle.util.Config;
 
-import static com.sunshine.engine.particle.util.ParticleConfig.INTERPOLATOR_LINEAR;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_LINEAR;
 
 public class ParticleModel {
   public Size size = new Size(0, 0);
@@ -31,7 +31,7 @@ public class ParticleModel {
   // x&y为Scene坐标系
   public void build(Scene scene, Particle p) {
     p.activeTimeDuration = activeTime.random();
-    p.activeTimeStart = ParticleConfig.NONE;
+    p.activeTimeStart = Config.NONE;
     p.setRcBmp(rcBmp);
     // alpha
     int alpha = alphaBegin.random();
