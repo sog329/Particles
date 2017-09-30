@@ -1,19 +1,15 @@
 package com.sunshine.engine.particle.model;
 
 import android.animation.TimeInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 
-import com.sunshine.engine.particle.util.ParticleConfig;
-import com.sunshine.engine.particle.util.SpringInterpolator;
+import com.sunshine.engine.particle.logic.InterpolatorBuilder;
 
 /** Created by songxiaoguang on 2017/9/13. */
 public abstract class ProcessObj<T> {
   protected T from;
   protected T to;
   protected T delta;
-  protected TimeInterpolator timeInterpolator = new LinearInterpolator();
+  protected TimeInterpolator interpolator = InterpolatorBuilder.get(null);
 
   public ProcessObj(T from, T to) {
     set(from, to);
@@ -41,16 +37,6 @@ public abstract class ProcessObj<T> {
   }
 
   public void setInterpolator(String type) {
-    if (ParticleConfig.INTERPOLATOR_LINEAR.equals(type)) {
-      timeInterpolator = new LinearInterpolator();
-    } else if (ParticleConfig.INTERPOLATOR_ACCELERATE.equals(type)) {
-      timeInterpolator = new AccelerateInterpolator();
-    } else if (ParticleConfig.INTERPOLATOR_DECELERATE.equals(type)) {
-      timeInterpolator = new DecelerateInterpolator();
-    } else if (ParticleConfig.INTERPOLATOR_SPRING.equals(type)) {
-      timeInterpolator = new SpringInterpolator();
-    } else {
-      timeInterpolator = new LinearInterpolator();
-    }
+    interpolator = InterpolatorBuilder.get(type);
   }
 }

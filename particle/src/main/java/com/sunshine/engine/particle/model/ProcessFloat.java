@@ -21,6 +21,6 @@ public class ProcessFloat extends ProcessObj<Float> {
 
   @Override
   public Float get(float percent) {
-    return from + delta * timeInterpolator.getInterpolation(percent);
+    return from + delta * interpolator.getInterpolation(percent);
   }
 }
