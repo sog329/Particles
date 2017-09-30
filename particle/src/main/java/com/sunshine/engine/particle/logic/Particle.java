@@ -9,9 +9,9 @@ import com.sunshine.engine.particle.util.Config;
 
 public class Particle {
   private Scene scene = null;
-  public long activeTimeDuration = 1000;
-  public long activeTimeStart = Config.NONE;
-  public Rect rcBmp = new Rect();
+  protected int activeTimeDuration = 1000;
+  protected long activeTimeStart = Config.NONE;
+  protected Rect rcBmp = new Rect();
   protected DrawInfo drawInfo = new DrawInfo();
   protected Anim anim = new Anim();
 
@@ -44,8 +44,7 @@ public class Particle {
     if (activeTimeStart == Config.NONE) {
       activeTimeStart = drawTime;
     }
-    int activeTime = (int) (drawTime - activeTimeStart);
-    float rp = 1f * activeTime / activeTimeDuration;
+    float rp = (float) (drawTime - activeTimeStart) / activeTimeDuration;
     if (rp <= 1) {
       anim.runAnimation(rp, drawInfo);
       mergeScene();

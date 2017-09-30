@@ -160,9 +160,6 @@ public class Scene {
             }
             if (pm != null) {
               pm.build(this, p);
-              if (dValue > Config.N_LIFE) { // 一次要增加过多
-                p.activeTimeStart = dt - (long) (p.activeTimeDuration * Math.random());
-              }
               lstIdleParticle.remove(p);
               lstActiveParticle.add(p);
             }
