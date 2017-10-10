@@ -8,40 +8,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 
-import java.io.File;
 import java.io.InputStream;
 
-import static com.sunshine.engine.particle.util.Config.PIC_NAME;
-import static com.sunshine.engine.particle.util.Config.SCRIPT_NAME;
 import static com.sunshine.engine.particle.util.Config.SEPARATOR;
 import static com.sunshine.engine.particle.util.Config.ZERO_FLOAT;
 
 public class Tool {
   private static final Handler handler = new Handler(Looper.getMainLooper());
-
-  public static String getScriptPath(String folderPath) {
-    String path = null;
-    if (folderPath != null) {
-      StringBuilder sb = new StringBuilder(folderPath);
-      if (!folderPath.endsWith(File.separator)) {
-        sb.append(File.separator);
-      }
-      path = sb.append(SCRIPT_NAME).toString();
-    }
-    return path;
-  }
-
-  public static String getPicPath(String folderPath) {
-    String path = null;
-    if (folderPath != null) {
-      StringBuilder sb = new StringBuilder(folderPath);
-      if (!folderPath.endsWith(File.separator)) {
-        sb.append(File.separator);
-      }
-      path = sb.append(PIC_NAME).toString();
-    }
-    return path;
-  }
 
   public static boolean equalsFloat(float f1, float f2) {
     return Math.abs(f1 - f2) < .00001f;

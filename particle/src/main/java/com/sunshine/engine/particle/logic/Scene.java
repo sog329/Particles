@@ -26,7 +26,8 @@ public class Scene {
   public List<Particle> lstIdleParticle = new ArrayList<>();
   public List<Particle> lstActiveParticle = new ArrayList<>();
   private List<ParticleModel> lstParticleModel = new ArrayList<>(); // 粒子模型
-  public String folderPath = null;
+  public String configPath = null;
+  public String picPath = null;
   public boolean isAsset = false;
   public Bitmap bmp = null;
   protected static final Paint pt = new Paint();
@@ -47,8 +48,9 @@ public class Scene {
     pt.setAntiAlias(true);
   }
 
-  public Scene(ViewHelper helper, String folderPath, boolean isAsset) {
-    this.folderPath = folderPath;
+  public Scene(ViewHelper helper, String configPath, String picPath, boolean isAsset) {
+    this.configPath = configPath;
+    this.picPath = picPath;
     this.isAsset = isAsset;
     this.helper = helper;
   }

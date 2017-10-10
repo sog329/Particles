@@ -49,9 +49,9 @@ public class SceneBuilder {
           boolean readXml = false;
           if (scene.isAsset) {
             Context context = scene.helper.getContext();
-            is = context.getAssets().open(Tool.getScriptPath(scene.folderPath));
+            is = context.getAssets().open(scene.configPath);
           } else {
-            File f = new File(Tool.getScriptPath(scene.folderPath));
+            File f = new File(scene.configPath);
             is = new FileInputStream(f);
           }
           readXml = XmlHandler.parse(is, scene);
@@ -61,9 +61,9 @@ public class SceneBuilder {
             Bitmap bmp = null;
             if (scene.isAsset) {
               Context context = scene.helper.getContext();
-              bmp = Tool.getBmpByAssets(context, Tool.getPicPath(scene.folderPath));
+              bmp = Tool.getBmpByAssets(context, scene.picPath);
             } else {
-              bmp = BitmapFactory.decodeFile(Tool.getPicPath(scene.folderPath));
+              bmp = BitmapFactory.decodeFile(scene.picPath);
             }
             if (bmp != null) {
               scene.setBmpAsync(bmp);

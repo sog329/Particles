@@ -25,10 +25,10 @@ public class ViewHelper {
         }
       };
 
-  public void play(View v, String folderPath, boolean isAsset) {
+  public void play(View v, String configPath, String picPath, boolean isAsset) {
     if (scene == null) {
       view = v;
-      scene = new Scene(this, folderPath, isAsset);
+      scene = new Scene(this, configPath, picPath, isAsset);
       scene.resize(viewArea.w, viewArea.h, viewArea.l, viewArea.t);
       SceneBuilder.load(scene);
     }

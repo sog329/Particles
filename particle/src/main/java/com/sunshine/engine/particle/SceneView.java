@@ -23,12 +23,12 @@ public class SceneView extends View {
     super(context, attrs, defStyle);
   }
 
-  public void playByAsset(String folderPath) {
-    mViewHelper.play(this, folderPath, true);
+  public void playByAsset(String configPath, String picPath) {
+    mViewHelper.play(this, configPath, picPath, true);
   }
 
-  public void play(String folderPath) {
-    mViewHelper.play(this, folderPath, false);
+  public void play(String configPath, String picPath) {
+    mViewHelper.play(this, configPath, picPath, false);
   }
 
   @Override
