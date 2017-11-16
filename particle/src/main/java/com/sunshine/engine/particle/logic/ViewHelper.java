@@ -25,13 +25,16 @@ public class ViewHelper {
         }
       };
 
-  public void play(View v, String configPath, String picPath, boolean isAsset) {
+  public boolean play(View v, String configPath, String picPath, boolean isAsset) {
+    boolean play = false;
     if (scene == null) {
       view = v;
       scene = new Scene(this, configPath, picPath, isAsset);
       scene.resize(viewArea.w, viewArea.h, viewArea.l, viewArea.t);
       SceneBuilder.load(scene);
+      play = true;
     }
+    return play;
   }
 
   public void resize(int left, int top, int r, int b) {

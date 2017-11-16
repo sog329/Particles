@@ -23,12 +23,24 @@ public class SceneView extends View {
     super(context, attrs, defStyle);
   }
 
-  public void playByAsset(String configPath, String picPath) {
-    mViewHelper.play(this, configPath, picPath, true);
+  /**
+   * 播放Asset资源
+   * @param configPath 脚本路径
+   * @param picPath 图片路径
+   * @return 是否投递播放任务，若当前正在播放则返回false
+   */
+  public boolean playByAsset(String configPath, String picPath) {
+    return mViewHelper.play(this, configPath, picPath, true);
   }
 
-  public void play(String configPath, String picPath) {
-    mViewHelper.play(this, configPath, picPath, false);
+  /**
+   * 播放外部资源
+   * @param configPath 脚本路径
+   * @param picPath 图片路径
+   * @return 是否投递播放任务，若当前正在播放则返回false
+   */
+  public boolean play(String configPath, String picPath) {
+    return mViewHelper.play(this, configPath, picPath, false);
   }
 
   @Override
