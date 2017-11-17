@@ -38,9 +38,11 @@ public class XmlHandler extends DefaultHandler {
   private static final String OFFSET = "offset:";
 
   private static final String ROTATE = "rotate";
+  private static final String ROTATE_INTERPOLATOR = "rotate_interpolator";
   private static final String ALPHA = "alpha";
   private static final String ALPHA_INTERPOLATOR = "alpha_interpolator";
   private static final String SCALE = "scale";
+  private static final String SCALE_INTERPOLATOR = "scale_interpolator";
 
   public static boolean parse(InputStream is, Scene st) {
     boolean success = false;
@@ -176,6 +178,9 @@ public class XmlHandler extends DefaultHandler {
         pm.ptRotate.x = Integer.parseInt(ary[2]);
         pm.ptRotate.y = Integer.parseInt(ary[3]);
       }
+    } else if (tag.equals(ROTATE_INTERPOLATOR)) {
+      ParticleModel pm = scene.getLastParticleModel();
+      pm.interpolatorRotate = bd.toString();
     } else if (tag.equals(ALPHA)) {
       ParticleModel pm = scene.getLastParticleModel();
       String[] ary = Tool.getAry(bd.toString());
@@ -197,6 +202,9 @@ public class XmlHandler extends DefaultHandler {
       } else {
         pm.scaleEnd = null;
       }
+    } else if (tag.equals(SCALE_INTERPOLATOR)) {
+      ParticleModel pm = scene.getLastParticleModel();
+      pm.interpolatorScale = bd.toString();
     }
   }
 }

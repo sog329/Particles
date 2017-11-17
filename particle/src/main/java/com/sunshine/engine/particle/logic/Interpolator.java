@@ -9,6 +9,7 @@ import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_ACCELERATE;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_DECELERATE;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_LINEAR;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SPRING;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_WAVE;
 
 /** Created by songxiaoguang on 2017/9/30. */
 public class Interpolator {
@@ -45,6 +46,20 @@ public class Interpolator {
             };
       }
       return interpolatorSpring;
+    } else if (type.startsWith(INTERPOLATOR_WAVE)) {
+      final int[] t = new int[1];
+      try {
+        t[0] = Integer.parseInt(type.split("_")[1]);
+      } catch (Exception e) {
+        e.printStackTrace();
+        t[0] = 2;
+      }
+      return new TimeInterpolator() {
+        @Override
+        public float getInterpolation(float p) {
+          return .5f + (float) Math.cos(2 * Math.PI * t[0] / 2 * p);
+        }
+      };
     } else {
       if (interpolatorLinear == null) {
         interpolatorLinear = new LinearInterpolator();

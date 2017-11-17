@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/snow3"
         android:alpha=".5"
-        android:text="star"/>
+        android:text="hi"/>
 
 
     <com.sunshine.engine.particle.SceneView

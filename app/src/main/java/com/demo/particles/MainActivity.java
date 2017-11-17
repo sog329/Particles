@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/star/config.xml", "particle/star/pic");
+                sceneView.playByAsset("particle/hi/config.xml", "particle/hi/pic");
               }
             });
 

@@ -22,11 +22,13 @@ public class ParticleModel {
   public Point ptRotate = new Point(0, 0);
   public ProcessInt rotateBegin = new ProcessInt(0, 100);
   public ProcessInt rotateEnd = new ProcessInt(200, 300);
+  public String interpolatorRotate = INTERPOLATOR_LINEAR;
   public ProcessInt alphaBegin = new ProcessInt(150, 255);
   public ProcessInt alphaEnd = new ProcessInt(150, 255);
   public String interpolatorAlpha = INTERPOLATOR_LINEAR;
   public ProcessFloat scaleBegin = new ProcessFloat(1f, 2f);
   public ProcessFloat scaleEnd = new ProcessFloat(0f, .2f);
+  public String interpolatorScale = INTERPOLATOR_LINEAR;
 
   // x&y为Scene坐标系
   public void build(Scene scene, Particle p) {
@@ -50,9 +52,11 @@ public class ParticleModel {
     float scaleFrom = scaleBegin.random();
     float scaleTo = scaleEnd == null ? scaleFrom : scaleEnd.random();
     p.anim.scale.set(scaleFrom, scaleTo);
+    p.anim.scale.setInterpolator(interpolatorScale);
     // rotate
     int rotate = rotateBegin.random();
     p.anim.rotate.set(rotate, rotateEnd == null ? rotate : rotateEnd.random());
+    p.anim.rotate.setInterpolator(interpolatorRotate);
     p.anim.ptRotate.set(ptRotate.x, ptRotate.y);
   }
 }
