@@ -5,66 +5,96 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
+import java.util.HashMap;
+
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_ACCELERATE;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_COS;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_DECELERATE;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_LINEAR;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SHAKE;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SIN;
 import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_SPRING;
-import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_WAVE;
+import static com.sunshine.engine.particle.util.Config.INTERPOLATOR_TRIANGLE;
 
 /** Created by songxiaoguang on 2017/9/30. */
 public class Interpolator {
 
-  private static TimeInterpolator interpolatorLinear = null;
-  private static TimeInterpolator interpolatorAccelerate = null;
-  private static TimeInterpolator interpolatorDecelerate = null;
-  private static TimeInterpolator interpolatorSpring = null;
+  private static HashMap<String, TimeInterpolator> map = new HashMap<>();
 
   public static TimeInterpolator build(String type) {
-    if (INTERPOLATOR_LINEAR.equals(type)) {
-      if (interpolatorLinear == null) {
-        interpolatorLinear = new LinearInterpolator();
-      }
-      return interpolatorLinear;
-    } else if (INTERPOLATOR_ACCELERATE.equals(type)) {
-      if (interpolatorAccelerate == null) {
-        interpolatorAccelerate = new AccelerateInterpolator();
-      }
-      return interpolatorAccelerate;
-    } else if (INTERPOLATOR_DECELERATE.equals(type)) {
-      if (interpolatorDecelerate == null) {
-        interpolatorDecelerate = new DecelerateInterpolator();
-      }
-      return interpolatorDecelerate;
-    } else if (INTERPOLATOR_SPRING.equals(type)) {
-      if (interpolatorSpring == null) {
-        interpolatorSpring =
+    TimeInterpolator interpolator = map.get(type);
+    if (interpolator == null) {
+      if (INTERPOLATOR_LINEAR.equals(type)) {
+        interpolator = new LinearInterpolator();
+      } else if (INTERPOLATOR_ACCELERATE.equals(type)) {
+        interpolator = new AccelerateInterpolator();
+      } else if (INTERPOLATOR_DECELERATE.equals(type)) {
+        interpolator = new DecelerateInterpolator();
+      } else if (INTERPOLATOR_SPRING.equals(type)) {
+        interpolator =
             new TimeInterpolator() {
               @Override
               public float getInterpolation(float p) {
                 return 4 * p * (1 - p);
               }
             };
+      } else if (type.startsWith(INTERPOLATOR_SHAKE)) {
+        final int t = getParamInt(type);
+        interpolator =
+            new TimeInterpolator() {
+              @Override
+              public float getInterpolation(float p) {
+                return (float) Math.pow(1 - p, 2) * (float) Math.sin(2 * Math.PI * t / 2 * p);
+              }
+            };
+      } else if (type.startsWith(INTERPOLATOR_SIN)) {
+        final int t = getParamInt(type);
+        interpolator =
+            new TimeInterpolator() {
+              @Override
+              public float getInterpolation(float p) {
+                return (float) Math.sin(2 * Math.PI * t / 2 * p);
+              }
+            };
+      } else if (type.startsWith(INTERPOLATOR_COS)) {
+        final int t = getParamInt(type);
+        interpolator =
+            new TimeInterpolator() {
+              @Override
+              public float getInterpolation(float p) {
+                return (float) Math.cos(2 * Math.PI * t / 2 * p);
+              }
+            };
+      } else if (type.startsWith(INTERPOLATOR_TRIANGLE)) {
+        final int t = getParamInt(type);
+        interpolator =
+            new TimeInterpolator() {
+              @Override
+              public float getInterpolation(float p) {
+                float fTotal = 2 * p * t;
+                int iTotal = (int) fTotal;
+                if (iTotal % 2 == 0) {
+                  return fTotal - iTotal;
+                } else {
+                  return 1 - fTotal + iTotal;
+                }
+              }
+            };
       }
-      return interpolatorSpring;
-    } else if (type.startsWith(INTERPOLATOR_WAVE)) {
-      final int[] t = new int[1];
-      try {
-        t[0] = Integer.parseInt(type.split("_")[1]);
-      } catch (Exception e) {
-        e.printStackTrace();
-        t[0] = 2;
+      if (interpolator == null) {
+        interpolator = new LinearInterpolator();
+      } else {
+        map.put(type, interpolator);
       }
-      return new TimeInterpolator() {
-        @Override
-        public float getInterpolation(float p) {
-          return .5f + (float) Math.cos(2 * Math.PI * t[0] / 2 * p);
-        }
-      };
-    } else {
-      if (interpolatorLinear == null) {
-        interpolatorLinear = new LinearInterpolator();
-      }
-      return interpolatorLinear;
+    }
+    return interpolator;
+  }
+
+  private static int getParamInt(String type) {
+    try {
+      return Integer.parseInt(type.split("_")[1]);
+    } catch (Exception e) {
+      return 2;
     }
   }
 }

@@ -25,9 +25,10 @@ public class SceneView extends View {
 
   /**
    * 播放Asset资源
+   *
    * @param configPath 脚本路径
    * @param picPath 图片路径
-   * @return 是否投递播放任务，若当前正在播放则返回false
+   * @return 是否成功投递播放任务，若当前正在播放则返回false
    */
   public boolean playByAsset(String configPath, String picPath) {
     return mViewHelper.play(this, configPath, picPath, true);
@@ -35,9 +36,10 @@ public class SceneView extends View {
 
   /**
    * 播放外部资源
+   *
    * @param configPath 脚本路径
    * @param picPath 图片路径
-   * @return 是否投递播放任务，若当前正在播放则返回false
+   * @return 是否成功投递播放任务，若当前正在播放则返回false
    */
   public boolean play(String configPath, String picPath) {
     return mViewHelper.play(this, configPath, picPath, false);
@@ -61,6 +63,12 @@ public class SceneView extends View {
   @Override
   protected void onDraw(Canvas can) {
     super.onDraw(can);
-    mViewHelper.drawSelf(this, can);
+    mViewHelper.drawSelf(can);
+  }
+
+  @Override
+  protected void onDetachedFromWindow() {
+    super.onDetachedFromWindow();
+    stop();
   }
 }

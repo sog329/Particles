@@ -2,6 +2,8 @@ package com.sunshine.engine.particle.logic;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 
 import com.sunshine.engine.particle.model.Area;
@@ -11,6 +13,7 @@ import com.sunshine.engine.particle.util.Tool;
 import static com.sunshine.engine.particle.util.Config.RENDER_INTERVAL;
 
 public class ViewHelper {
+  protected static final Handler handler = new Handler(Looper.getMainLooper());
   protected Scene scene = null;
   private Area viewArea = new Area();
   private long drawTime = Config.NONE;
@@ -48,18 +51,16 @@ public class ViewHelper {
   }
 
   public void stop() {
+    handler.removeCallbacks(rnRequestRender);
     if (scene != null) {
       scene.destroy();
       scene = null;
     }
-    if (view != null) {
-      view.removeCallbacks(rnRequestRender);
-      view = null;
-    }
+    view = null;
   }
 
   public void stopAsync(final Scene sc) {
-    Tool.post(
+    handler.post(
         new Runnable() {
           @Override
           public void run() {
@@ -70,17 +71,17 @@ public class ViewHelper {
         });
   }
 
-  public void drawSelf(View view, Canvas can) {
+  public void drawSelf(Canvas can) {
     if (scene != null) {
       drawTime = Tool.getTime();
       boolean needRender = scene.draw(can, drawTime);
       if (needRender) {
         int nextRenderTime = RENDER_INTERVAL - (int) (Tool.getTime() - drawTime);
-        view.removeCallbacks(rnRequestRender);
+        handler.removeCallbacks(rnRequestRender);
         if (nextRenderTime <= 0) {
-          view.invalidate();
+          rnRequestRender.run();
         } else {
-          view.postDelayed(rnRequestRender, nextRenderTime);
+          handler.postDelayed(rnRequestRender, nextRenderTime);
         }
       }
     }

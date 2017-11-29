@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/snow2/config.xml", "particle/snow2/pic");
+                sceneView.playByAsset("particle/christmas/config.xml", "particle/christmas/pic");
               }
             });
     findViewById(R.id.flower)
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/flower/config.xml", "particle/flower/pic");
+                sceneView.playByAsset("particle/smell/config.xml", "particle/smell/pic");
               }
             });
 
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/rain/config.xml", "particle/rain/pic");
+                sceneView.playByAsset("particle/what/config.xml", "particle/what/pic");
               }
             });
     findViewById(R.id.smallFlower)
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/smallFlower/config.xml", "particle/smallFlower/pic");
+                sceneView.playByAsset("particle/cry/config.xml", "particle/cry/pic");
               }
             });
 
@@ -82,7 +82,16 @@ public class MainActivity extends AppCompatActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                sceneView.playByAsset("particle/snow3/config.xml", "particle/snow3/pic");
+                sceneView.playByAsset("particle/no/config.xml", "particle/no/pic");
+              }
+            });
+
+    findViewById(R.id.yeah)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                sceneView.playByAsset("particle/yeah/config.xml", "particle/yeah/pic");
               }
             });
   }

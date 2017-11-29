@@ -13,7 +13,10 @@ public class Config {
 	public static final String INTERPOLATOR_ACCELERATE = "accelerate";
 	public static final String INTERPOLATOR_DECELERATE = "decelerate";
 	public static final String INTERPOLATOR_SPRING = "spring";
-	public static final String INTERPOLATOR_WAVE = "wave";
+	public static final String INTERPOLATOR_SHAKE = "shake";
+	public static final String INTERPOLATOR_SIN = "sin";
+	public static final String INTERPOLATOR_COS = "cos";
+	public static final String INTERPOLATOR_TRIANGLE = "triangle";
 
 	public static final String LAYOUT_CENTER = "center";
 	public static final String LAYOUT_TOP = "top";

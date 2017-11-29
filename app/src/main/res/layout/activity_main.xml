@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/christmasTree"
         android:alpha=".5"
-        android:text="snow2"/>
+        android:text="christmas"/>
 
     <Button
         android:id="@+id/flower"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/snow2"
         android:alpha=".5"
-        android:text="flower"/>
+        android:text="smell"/>
 
     <Button
         android:id="@+id/rain"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/flower"
         android:alpha=".5"
-        android:text="rain"/>
+        android:text="what"/>
 
     <Button
         android:id="@+id/smallFlower"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rain"
         android:alpha=".5"
-        android:text="smallFlower"/>
+        android:text="cry"/>
 
     <Button
         android:id="@+id/snow"
@@ -56,12 +56,20 @@
         android:text="snow"/>
 
     <Button
+        android:id="@+id/yeah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/star"
+        android:alpha=".5"
+        android:text="yeah"/>
+
+    <Button
         android:id="@+id/snow3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/snow"
         android:alpha=".5"
-        android:text="snow3"/>
+        android:text="no"/>
 
     <Button
         android:id="@+id/star"

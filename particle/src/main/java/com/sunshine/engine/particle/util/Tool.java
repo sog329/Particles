@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.SystemClock;
 
 import java.io.InputStream;
@@ -14,8 +12,6 @@ import static com.sunshine.engine.particle.util.Config.SEPARATOR;
 import static com.sunshine.engine.particle.util.Config.ZERO_FLOAT;
 
 public class Tool {
-  private static final Handler handler = new Handler(Looper.getMainLooper());
-
   public static boolean equalsFloat(float f1, float f2) {
     return Math.abs(f1 - f2) < .00001f;
   }
@@ -73,9 +69,5 @@ public class Tool {
 
   public static long getTime() {
     return SystemClock.elapsedRealtime();
-  }
-
-  public static void post(Runnable runnable) {
-    handler.post(runnable);
   }
 }

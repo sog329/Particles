@@ -2,6 +2,7 @@ package com.sunshine.engine.particle.logic;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.DrawFilter;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 
@@ -154,8 +155,7 @@ public class Scene {
               for (int j = 0; j < lstParticleModel.size(); j++) {
                 pm = lstParticleModel.get(j);
                 if (pm != null
-                    && Tool.isInRange(
-                        random, pm.chanceRange.getFrom(), pm.chanceRange.getTo())) {
+                    && Tool.isInRange(random, pm.chanceRange.getFrom(), pm.chanceRange.getTo())) {
                   break;
                 }
               }
@@ -176,6 +176,7 @@ public class Scene {
   private void renderActiveParticle(Canvas can, Bitmap bmp, long drawTime) {
     int cs = can.save();
     can.translate(-viewArea.l, -viewArea.t);
+    DrawFilter drawFilter = can.getDrawFilter();
     can.setDrawFilter(pd);
     Iterator<Particle> it = lstActiveParticle.iterator();
     while (it.hasNext()) {
@@ -186,6 +187,7 @@ public class Scene {
       }
     }
     can.restoreToCount(cs);
+    can.setDrawFilter(drawFilter);
   }
 
   protected void destroy() {
@@ -220,7 +222,7 @@ public class Scene {
   }
 
   public void setBmpAsync(final Bitmap bitmap) {
-    Tool.post(
+    ViewHelper.handler.post(
         new Runnable() {
           @Override
           public void run() {
